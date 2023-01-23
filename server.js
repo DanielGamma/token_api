@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 
 const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const cors = require("cors");
 
 app.use(cors());
@@ -21,7 +22,9 @@ app.get("/", async (req, res) => {
         }
         else {
             const token = bearer.split(" ")[1];
-            const isAuthenticated = await bcrypt.compare(name, token);
+            // Change bcrypt to bcryptjs
+            const isAuthenticated = await bcryptjs.compareSync(name, token);
+            //const isAuthenticated = await bcrypt.compare(name, token);
             if (!isAuthenticated) {
                 return res.status(401).send({ status: "unauthenticated", error: "Did you think you could fool me?! You shall not pass!" })
             } else {
@@ -37,7 +40,10 @@ app.post("/auth", async (req, res) => {
     const { name } = req.body;
     try {
         if (name) {
-            const hash = await bcrypt.hash(name, 5);
+            // Change bcrypt to bcryptjs
+            const salt = bcryptjs.genSaltSync(5);
+            const hash = bcryptjs.hashSync(name, salt);
+            //const hash = await bcrypt.hash(name, 5);
             res.send({ token: hash });
         } else {
             res.send({ error: "No name provided. Please, send your name to get a token." })
