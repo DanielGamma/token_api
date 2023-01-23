@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
         else {
             const token = bearer.split(" ")[1];
             // Change bcrypt to bcryptjs
-            const isAuthenticated = await bcryptjs.compareSync(name, token);
+            const isAuthenticated = bcryptjs.compareSync(name, token);
             //const isAuthenticated = await bcrypt.compare(name, token);
             if (!isAuthenticated) {
                 return res.status(401).send({ status: "unauthenticated", error: "Did you think you could fool me?! You shall not pass!" })
