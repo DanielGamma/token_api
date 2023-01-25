@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.get("/", async (req, res) => {
     const bearer = req.headers.authorization;
-    const { name } = req.body;
+    const { name } = req.query;
     try {
         if (!bearer) {
             return res.status(401).send({ status: "unauthenticated", error: "No token provided. You can get a token in /auth." })
