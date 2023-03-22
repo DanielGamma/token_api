@@ -39,7 +39,7 @@ const checkAuth = (req, res) => {
             }
         }
     } catch (error) {
-        return res.status(500).send({ error: "An error occurred. Contact your handsome teacher for assistance." })
+        return res.status(500).send({ code: 500, message: "An error occurred. Contact your handsome teacher for assistance." })
     }
 }
 
