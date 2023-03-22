@@ -35,7 +35,7 @@ const checkAuth = (req, res) => {
             if (!isAuthenticated) {
                 return res.status(401).send({ code: 401, message: "Did you think you could fool me?! You shall not pass!" })
             } else {
-                return res.status(200).send({ code: 200, message: `Oh, I konw you, you can pass!` })
+                return res.status(200).send({ code: 200, message: `Oh, I konw you, you shall pass!` })
             }
         }
     } catch (error) {
